@@ -1,7 +1,7 @@
 package com.monolithiot.inventory.service.commons;
 
 import com.github.pagehelper.PageInfo;
-import com.monolithiot.inventory.entity.AbstractEntity;
+import com.monolithiot.inventory.commons.entity.AbstractEntity;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;

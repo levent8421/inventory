@@ -1,6 +1,6 @@
-package com.monolithiot.inventory.entity;
+package com.monolithiot.inventory.commons.entity;
 
-import com.monolithiot.inventory.context.Constants;
+import com.monolithiot.inventory.commons.context.Constants;
 import com.monolithiot.inventory.commons.util.DateTimeUtils;
 import lombok.Data;
 

@@ -1,7 +1,7 @@
 package com.monolithiot.inventory.service.vo;
 
 import com.monolithiot.inventory.commons.util.UserPermissionUtils;
-import com.monolithiot.inventory.entity.User;
+import com.monolithiot.inventory.commons.entity.User;
 import lombok.Data;
 import lombok.val;
 

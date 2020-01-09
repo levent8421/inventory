@@ -4,7 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.monolithiot.inventory.commons.exception.InternalServerErrorException;
 import com.monolithiot.inventory.commons.exception.ResourceNotFoundException;
-import com.monolithiot.inventory.entity.AbstractEntity;
+import com.monolithiot.inventory.commons.entity.AbstractEntity;
 import com.monolithiot.inventory.repository.AbstractMapper;
 import com.monolithiot.inventory.service.commons.AbstractService;
 import lombok.extern.slf4j.Slf4j;

@@ -1,6 +1,6 @@
 package com.monolithiot.inventory.service.general.impl;
 
-import com.monolithiot.inventory.entity.User;
+import com.monolithiot.inventory.commons.entity.User;
 import com.monolithiot.inventory.repository.mapper.UserMapper;
 import com.monolithiot.inventory.service.commons.impl.AbstractServiceImpl;
 import com.monolithiot.inventory.service.general.UserService;

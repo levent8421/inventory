@@ -1,6 +1,6 @@
 package com.monolithiot.inventory.repository;
 
-import com.monolithiot.inventory.entity.AbstractEntity;
+import com.monolithiot.inventory.commons.entity.AbstractEntity;
 import tk.mybatis.mapper.common.*;
 
 /**

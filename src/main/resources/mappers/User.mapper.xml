@@ -16,7 +16,7 @@
         from t_user as u
         where u.deleted = false
     </sql>
-    <resultMap id="rm_base" type="com.monolithiot.inventory.entity.User">
+    <resultMap id="rm_base" type="com.monolithiot.inventory.commons.entity.User">
         <id column="u_id" property="id"/>
         <result column="u_name" property="name"/>
         <result column="u_password" property="password"/>

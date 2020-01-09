@@ -3,7 +3,7 @@ package com.monolithiot.inventory.commons.util;
 import com.monolithiot.inventory.commons.exception.BadRequestException;
 import com.monolithiot.inventory.commons.exception.InternalServerErrorException;
 import com.monolithiot.inventory.commons.fn.GetterFunction;
-import com.monolithiot.inventory.context.Constants;
+import com.monolithiot.inventory.commons.context.Constants;
 import lombok.val;
 
 import java.io.UnsupportedEncodingException;

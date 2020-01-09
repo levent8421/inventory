@@ -1,6 +1,6 @@
 package com.monolithiot.inventory.repository.mapper;
 
-import com.monolithiot.inventory.entity.User;
+import com.monolithiot.inventory.commons.entity.User;
 import com.monolithiot.inventory.repository.AbstractMapper;
 import org.springframework.stereotype.Repository;
 

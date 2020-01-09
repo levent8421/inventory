@@ -1,4 +1,4 @@
-package com.monolithiot.inventory.entity;
+package com.monolithiot.inventory.commons.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

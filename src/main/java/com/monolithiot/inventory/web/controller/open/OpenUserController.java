@@ -1,6 +1,6 @@
 package com.monolithiot.inventory.web.controller.open;
 
-import com.monolithiot.inventory.entity.User;
+import com.monolithiot.inventory.commons.entity.User;
 import com.monolithiot.inventory.service.general.UserService;
 import com.monolithiot.inventory.service.vo.UserPermission;
 import com.monolithiot.inventory.web.controller.commons.AbstractController;
