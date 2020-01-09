@@ -1,0 +1,7 @@
+server:
+  port: 8301
+spring:
+  datasource:
+    url:
+    username:
+    password:

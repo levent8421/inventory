@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monolithiot.inventory.repository.mapper.UserMapper">
+    <sql id="columns">
+        u.id          u_id,
+        u.name        u_name,
+        u.password    u_password,
+        u.permission  u_permission,
+        u.create_time u_create_time,
+        u.update_time u_update_time,
+        u.deleted     u_deleted
+    </sql>
+    <sql id="select">
+        select
+        <include refid="columns"/>
+        from t_user as u
+        where u.deleted = false
+    </sql>
+    <resultMap id="rm_base" type="com.monolithiot.inventory.entity.User">
+        <id column="u_id" property="id"/>
+        <result column="u_name" property="name"/>
+        <result column="u_password" property="password"/>
+        <result column="u_permission" property="permission"/>
+        <result column="u_create_time" property="createTime"/>
+        <result column="u_update_time" property="updateTime"/>
+        <result column="u_deleted" property="deleted"/>
+    </resultMap>
+</mapper>
