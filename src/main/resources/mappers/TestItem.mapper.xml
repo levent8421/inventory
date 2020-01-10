@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monolithiot.inventory.repository.mapper.TestItemMapper">
+    <sql id="columns">
+        ti.id           ti_id,
+        ti.test_log_id  ti_test_log_id,
+        ti.name         ti_name,
+        ti.state        ti_state,
+        ti.result_value ti_result_value,
+        ti.remark       ti_remark,
+        ti.create_time  ti_create_time,
+        ti.update_time  ti_update_time,
+        ti.deleted      ti_deleted
+    </sql>
+    <sql id="select">
+        select
+        <include refid="columns"/>
+        from t_test_item as ti
+        where ti.deleted = false
+    </sql>
+    <resultMap id="rm_base" type="com.monolithiot.inventory.commons.entity.TestItem">
+        <id column="ti_id" property="id"/>
+        <result column="ti_test_log_id" property="testLogId"/>
+        <result column="ti_name" property="name"/>
+        <result column="ti_state" property="state"/>
+        <result column="ti_result_value" property="resultValue"/>
+        <result column="ti_remark" property="remark"/>
+        <result column="ti_create_time" property="createTime"/>
+        <result column="ti_update_time" property="updateTime"/>
+        <result column="ti_deleted" property="deleted"/>
+    </resultMap>
+</mapper>

@@ -13,6 +13,11 @@ import java.util.Date;
  * @author Levent*421
  */
 public class DateTimeUtils {
+    /**
+     * Obtain Current Time
+     *
+     * @return DateTime Object
+     */
     public static Date now() {
         return new Date();
     }

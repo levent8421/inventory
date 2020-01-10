@@ -2,6 +2,7 @@ package com.monolithiot.inventory.repository.mapper;
 
 import com.monolithiot.inventory.commons.entity.User;
 import com.monolithiot.inventory.repository.AbstractMapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -16,4 +17,11 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface UserMapper extends AbstractMapper<User> {
+    /**
+     * Final User by Username
+     *
+     * @param username Username
+     * @return user
+     */
+    User selectByName(@Param("username") String username);
 }

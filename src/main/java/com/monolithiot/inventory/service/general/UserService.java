@@ -14,4 +14,20 @@ import com.monolithiot.inventory.service.commons.AbstractService;
  * @author Levent*421
  */
 public interface UserService extends AbstractService<User> {
+    /**
+     * Final User By Username
+     *
+     * @param username username
+     * @return user
+     */
+    User findByName(String username);
+
+    /**
+     * 登录
+     *
+     * @param username username
+     * @param password password
+     * @return User
+     */
+    User login(String username, String password);
 }

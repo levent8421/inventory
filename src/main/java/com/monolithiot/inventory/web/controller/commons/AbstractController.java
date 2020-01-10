@@ -1,5 +1,9 @@
 package com.monolithiot.inventory.web.controller.commons;
 
+import com.monolithiot.inventory.commons.context.Constants;
+import com.monolithiot.inventory.commons.entity.User;
+import com.monolithiot.inventory.commons.exception.PermissionDeniedException;
+import com.monolithiot.inventory.security.RequestExtendParamHolder;
 import lombok.val;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -13,7 +17,7 @@ import javax.validation.constraints.NotNull;
  * @author 郭文梁
  * @data 2019/5/18 0018
  */
-public abstract class AbstractController {
+public abstract class AbstractController extends ShiroExceptionHandlerController {
     private static final String ERROR_VIEW_NAME = "sys-error";
     /**
      * 默认页码
@@ -45,7 +49,7 @@ public abstract class AbstractController {
     protected int defaultRows(Integer rows) {
         return (rows == null || rows < 1) ? DEFAULT_ROWS : rows;
     }
-    
+
     /**
      * 错误界面视图
      *
@@ -58,5 +62,27 @@ public abstract class AbstractController {
         mv.addObject("title", title);
         mv.addObject("msg", msg);
         return mv;
+    }
+
+    /**
+     * 当前用户
+     *
+     * @return 用户
+     */
+    public User currentUser() {
+        return RequestExtendParamHolder.get(Constants.Security.USER_EXTEND_PARAM_NAME, User.class);
+    }
+
+    /**
+     * 获取当前登录的用户 未登录用户时抛出授权异常
+     *
+     * @return 用户
+     */
+    public User requireCurrentUser() {
+        val user = currentUser();
+        if (user == null) {
+            throw new PermissionDeniedException("未登录！");
+        }
+        return user;
     }
 }

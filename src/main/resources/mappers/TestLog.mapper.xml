@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monolithiot.inventory.repository.mapper.TestLogMapper">
+    <sql id="columns">
+        tl.id               tl_id,
+        tl.trace_no         tl_trace_no,
+        tl.tester_id        tl_tester_id,
+        tl.product_order_id tl_product_order_id,
+        tl.product_part_id  tl_product_part_id,
+        tl.device_sn        tl_device_sn,
+        tl.state            tl_state,
+        tl.remark           tl_remark,
+        tl.create_time      tl_create_time,
+        tl.update_time      tl_update_time,
+        tl.deleted          tl_deleted
+    </sql>
+    <sql id="select">
+        select
+        <include refid="columns"/>
+        from t_test_log as tl
+        where tl.deleted = false
+    </sql>
+    <resultMap id="rm_base" type="com.monolithiot.inventory.commons.entity.TestLog">
+        <id column="tl_id" property="id"/>
+        <result column="tl_trace_no" property="traceNo"/>
+        <result column="tl_tester_id" property="testerId"/>
+        <result column="tl_product_order_id" property="productOrderId"/>
+        <result column="tl_product_part_id" property="productPartId"/>
+        <result column="tl_device_sn" property="deviceSn"/>
+        <result column="tl_state" property="state"/>
+        <result column="tl_remark" property="remark"/>
+        <result column="tl_create_time" property="createTime"/>
+        <result column="tl_update_time" property="updateTime"/>
+        <result column="tl_deleted" property="deleted"/>
+    </resultMap>
+</mapper>

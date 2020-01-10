@@ -14,7 +14,7 @@
         select
         <include refid="columns"/>
         from t_user as u
-        where u.deleted = false
+        where (u.deleted = false or u.deleted is null)
     </sql>
     <resultMap id="rm_base" type="com.monolithiot.inventory.commons.entity.User">
         <id column="u_id" property="id"/>
@@ -25,4 +25,8 @@
         <result column="u_update_time" property="updateTime"/>
         <result column="u_deleted" property="deleted"/>
     </resultMap>
+    <select id="selectByName" resultMap="rm_base">
+        <include refid="select"/>
+        and u.name = #{username} limit 1
+    </select>
 </mapper>

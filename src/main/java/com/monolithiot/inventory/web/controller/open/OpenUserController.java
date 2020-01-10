@@ -1,15 +1,20 @@
 package com.monolithiot.inventory.web.controller.open;
 
 import com.monolithiot.inventory.commons.entity.User;
+import com.monolithiot.inventory.commons.exception.BadRequestException;
+import com.monolithiot.inventory.commons.util.ParamChecker;
+import com.monolithiot.inventory.security.StatelessToken;
+import com.monolithiot.inventory.security.encrypt.AccessTokenEncoder;
+import com.monolithiot.inventory.security.util.AccessTokenUtils;
 import com.monolithiot.inventory.service.general.UserService;
 import com.monolithiot.inventory.service.vo.UserPermission;
 import com.monolithiot.inventory.web.controller.commons.AbstractController;
 import com.monolithiot.inventory.web.vo.GeneralResult;
+import com.monolithiot.inventory.web.vo.LoginResult;
+import com.monolithiot.inventory.web.vo.UserLoginParam;
 import lombok.val;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.apache.shiro.SecurityUtils;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,9 +32,12 @@ import java.util.List;
 @RequestMapping("/open/user")
 public class OpenUserController extends AbstractController {
     private final UserService userService;
+    private final AccessTokenEncoder accessTokenEncoder;
 
-    public OpenUserController(UserService userService) {
+    public OpenUserController(UserService userService,
+                              AccessTokenEncoder accessTokenEncoder) {
         this.userService = userService;
+        this.accessTokenEncoder = accessTokenEncoder;
     }
 
     /**
@@ -54,5 +62,36 @@ public class OpenUserController extends AbstractController {
         val user = userService.require(id);
         val permission = UserPermission.fromUser(user);
         return GeneralResult.ok(permission);
+    }
+
+    /**
+     * 用户登录
+     *
+     * @param param param
+     * @return GR
+     */
+    @PostMapping("/_login")
+    public GeneralResult<?> login(@RequestBody UserLoginParam param) {
+        val ex = BadRequestException.class;
+        ParamChecker.notNull(param, ex, "No Params sent!");
+        ParamChecker.notEmpty(param.getUsername(), ex, "用户名必填！");
+        ParamChecker.notEmpty(param.getPassword(), ex, "密码必填！");
+        val user = userService.login(param.getUsername(), param.getPassword());
+        if (user == null) {
+            return GeneralResult.ok("用户名或密码错误！");
+        }
+        val digestString = AccessTokenUtils.asTokenString(user, accessTokenEncoder);
+
+        val loginToken = new StatelessToken();
+        loginToken.setUsername(user.getName());
+        loginToken.setDigest(digestString);
+        val subject = SecurityUtils.getSubject();
+        subject.login(loginToken);
+
+        val res = new LoginResult();
+        res.setToken(loginToken.asTokenString());
+        res.setUsername(user.getName());
+        res.setUserPermission(UserPermission.fromUser(user));
+        return GeneralResult.ok(res);
     }
 }

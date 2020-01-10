@@ -1,3 +1,6 @@
 spring:
   profiles:
     include: datasource-dev,web-dev
+logging:
+  level:
+    com.monolithiot.inventory: debug

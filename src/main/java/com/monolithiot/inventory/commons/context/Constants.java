@@ -33,4 +33,32 @@ public class Constants {
          */
         public static final String MAPPER_PACKAGES = BASE_PACKAGE + ".repository.mapper";
     }
+
+    /**
+     * Content Type Table
+     */
+    public static class ContentType {
+        /**
+         * JSON encode by utf-8
+         */
+        public static final String JSON_UTF8 = "application/json; charset=utf-8";
+    }
+
+    /**
+     * 安全相关常量表
+     */
+    public static class Security {
+        /**
+         * 令牌参数名称
+         */
+        public static final String CLIENT_TOKEN_DIGEST_PARAM_NAME = "token";
+        /**
+         * 令牌请求头名称
+         */
+        public static final String CLIENT_TOKEN_DIGEST_HEADER_NAME = "X-Token";
+        /**
+         * 扩展参数：用户 参数名
+         */
+        public static final String USER_EXTEND_PARAM_NAME = "auth.user";
+    }
 }
