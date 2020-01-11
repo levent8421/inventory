@@ -1,5 +1,7 @@
 package com.monolithiot.inventory.commons.util;
 
+import org.apache.commons.lang3.time.FastDateFormat;
+
 import java.util.Date;
 
 /**
@@ -20,5 +22,17 @@ public class DateTimeUtils {
      */
     public static Date now() {
         return new Date();
+    }
+
+    /**
+     * 格式化日期
+     *
+     * @param date   日期
+     * @param format 格式
+     * @return 格式结果
+     */
+    public static String format(Date date, String format) {
+        FastDateFormat dateFormat = FastDateFormat.getInstance(format);
+        return dateFormat.format(date);
     }
 }

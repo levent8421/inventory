@@ -7,6 +7,8 @@ import com.monolithiot.inventory.service.general.TestItemService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Create By Levent8421
  * Create Time: 2020/1/9 16:07
@@ -25,5 +27,10 @@ public class TestItemServiceImpl extends AbstractServiceImpl<TestItem> implement
     public TestItemServiceImpl(TestItemMapper testItemMapper) {
         super(testItemMapper);
         this.testItemMapper = testItemMapper;
+    }
+
+    @Override
+    public void log(List<TestItem> testItems) {
+        save(testItems);
     }
 }

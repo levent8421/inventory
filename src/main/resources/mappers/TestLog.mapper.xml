@@ -5,6 +5,8 @@
         tl.id               tl_id,
         tl.trace_no         tl_trace_no,
         tl.tester_id        tl_tester_id,
+        tl.test_time        tl_test_time,
+        tl.duration         tl_duration,
         tl.product_order_id tl_product_order_id,
         tl.product_part_id  tl_product_part_id,
         tl.device_sn        tl_device_sn,
@@ -24,6 +26,8 @@
         <id column="tl_id" property="id"/>
         <result column="tl_trace_no" property="traceNo"/>
         <result column="tl_tester_id" property="testerId"/>
+        <result column="tl_test_time" property="testTime"/>
+        <result column="tl_duration" property="duration"/>
         <result column="tl_product_order_id" property="productOrderId"/>
         <result column="tl_product_part_id" property="productPartId"/>
         <result column="tl_device_sn" property="deviceSn"/>

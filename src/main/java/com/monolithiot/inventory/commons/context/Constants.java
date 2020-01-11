@@ -61,4 +61,22 @@ public class Constants {
          */
         public static final String USER_EXTEND_PARAM_NAME = "auth.user";
     }
+
+    /**
+     * 时间日期相关常量
+     */
+    public static class Datetime {
+        /**
+         * 日期格式
+         */
+        public static final String DATE_FORMAT = "yyyy-MM-dd";
+        /**
+         * 时间格式
+         */
+        public static final String TIME_FORMAT = "HH:mm:ss";
+        /**
+         * 时间日期格式
+         */
+        public static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    }
 }

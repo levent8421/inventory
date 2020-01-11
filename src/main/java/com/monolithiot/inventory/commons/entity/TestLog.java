@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
+import java.util.Date;
 
 /**
  * Create By Levent8421
@@ -34,6 +35,16 @@ public class TestLog extends AbstractEntity {
      * 测试人对象
      */
     private User tester;
+    /**
+     * 测试时间
+     */
+    @Column(name = "test_time", nullable = false)
+    private Date testTime;
+    /**
+     * 测试耗时
+     */
+    @Column(name = "duration", length = 10)
+    private Integer duration;
     /**
      * 订单ID
      */

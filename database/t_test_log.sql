@@ -16,10 +16,16 @@ create table t_test_log
     deleted          bit(1)       not null comment '是否被标记删除'
 );
 
+alter table t_test_log
+    add column test_time datetime not null comment '测试时间' after tester_id;
+alter table t_test_log
+    add column duration int(10) not null comment '测试耗时ms' after test_time;
 # 基本查询语句
 select tl.id               tl_id,
        tl.trace_no         tl_trace_no,
        tl.tester_id        tl_tester_id,
+       tl.test_time        tl_test_time,
+       tl.duration         tl_duration,
        tl.product_order_id tl_product_order_id,
        tl.product_part_id  tl_product_part_id,
        tl.device_sn        tl_device_sn,

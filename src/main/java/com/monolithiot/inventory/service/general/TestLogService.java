@@ -1,6 +1,7 @@
 package com.monolithiot.inventory.service.general;
 
 import com.monolithiot.inventory.commons.entity.TestLog;
+import com.monolithiot.inventory.commons.entity.User;
 import com.monolithiot.inventory.service.commons.AbstractService;
 
 /**
@@ -14,4 +15,10 @@ import com.monolithiot.inventory.service.commons.AbstractService;
  * @author Levent*421
  */
 public interface TestLogService extends AbstractService<TestLog> {
+    /**
+     * 记录测试日志
+     *
+     * @param testLog testLog entity object
+     */
+    void log(TestLog testLog, User tester);
 }

@@ -6,6 +6,8 @@
         ti.test_log_id  ti_test_log_id,
         ti.name         ti_name,
         ti.state        ti_state,
+        ti.test_time    ti_test_time,
+        ti.duration     ti_duration,
         ti.result_value ti_result_value,
         ti.remark       ti_remark,
         ti.create_time  ti_create_time,
@@ -23,6 +25,8 @@
         <result column="ti_test_log_id" property="testLogId"/>
         <result column="ti_name" property="name"/>
         <result column="ti_state" property="state"/>
+        <result column="ti_test_time" property="testTime"/>
+        <result column="ti_duration" property="duration"/>
         <result column="ti_result_value" property="resultValue"/>
         <result column="ti_remark" property="remark"/>
         <result column="ti_create_time" property="createTime"/>

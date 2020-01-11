@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
+import java.util.Date;
 
 /**
  * Create By Levent8421
@@ -35,6 +36,16 @@ public class TestItem extends AbstractEntity {
      */
     @Column(name = "state", length = 2, nullable = false)
     private Integer state;
+    /**
+     * 测试时间
+     */
+    @Column(name = "test_time", nullable = false)
+    private Date testTime;
+    /**
+     * 测试用时
+     */
+    @Column(name = "duration", length = 10)
+    private Integer duration;
     /**
      * 测试结果
      */

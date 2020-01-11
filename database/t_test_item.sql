@@ -1,4 +1,4 @@
-drop table if exists t_tesst_item;
+drop table if exists t_test_item;
 
 # 表结构定义
 
@@ -15,10 +15,17 @@ create table t_test_item
     deleted      bit(1)       not null comment '是否标记删除'
 );
 
+alter table t_test_item
+    add column test_time datetime not null comment '测试时间' after state;
+alter table t_test_item
+    add column duration int(10) not null comment '测试耗时ms' after test_time;
+
 select ti.id           ti_id,
        ti.test_log_id  ti_test_log_id,
        ti.name         ti_name,
        ti.state        ti_state,
+       ti.test_time    ti_test_time,
+       ti.duration     ti_duration,
        ti.result_value ti_result_value,
        ti.remark       ti_remark,
        ti.create_time  ti_create_time,
