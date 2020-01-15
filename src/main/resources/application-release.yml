@@ -1,7 +1,6 @@
-server:
-  port: 8301
 spring:
-  datasource:
-    url:
-    username:
-    password:
+  profiles:
+    include: datasource-release,web-release
+#logging:
+#  level:
+#    com.monolithiot.inventory: debug
