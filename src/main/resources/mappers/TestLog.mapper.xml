@@ -22,6 +22,13 @@
         from t_test_log as tl
         where tl.deleted = false
     </sql>
+    <sql id="select_fetch_all">
+        select
+        <include refid="columns"/>,
+        <include refid="com.monolithiot.inventory.repository.mapper.UserMapper.columns"/>
+        from t_test_log as tl left outer join t_user as u on tl.tester_id=u.id where ((tl.deleted is null or
+        tl.deleted=false) and (u.deleted is null or u.deleted=false))
+    </sql>
     <resultMap id="rm_base" type="com.monolithiot.inventory.commons.entity.TestLog">
         <id column="tl_id" property="id"/>
         <result column="tl_trace_no" property="traceNo"/>
@@ -37,4 +44,11 @@
         <result column="tl_update_time" property="updateTime"/>
         <result column="tl_deleted" property="deleted"/>
     </resultMap>
+    <resultMap id="rm_with_all" type="com.monolithiot.inventory.commons.entity.TestLog" extends="rm_base">
+        <association property="tester" resultMap="com.monolithiot.inventory.repository.mapper.UserMapper.rm_base"/>
+    </resultMap>
+    <select id="selectFetchAll" resultMap="rm_with_all">
+        <include refid="select_fetch_all"/>
+        order by tl.create_time desc
+    </select>
 </mapper>

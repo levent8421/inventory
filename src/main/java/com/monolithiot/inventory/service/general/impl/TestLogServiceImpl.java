@@ -1,5 +1,7 @@
 package com.monolithiot.inventory.service.general.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.monolithiot.inventory.commons.entity.TestLog;
 import com.monolithiot.inventory.commons.entity.User;
 import com.monolithiot.inventory.commons.util.RandomUtils;
@@ -47,5 +49,11 @@ public class TestLogServiceImpl extends AbstractServiceImpl<TestLog> implements 
     private void randomTrace(TestLog testLog) {
         val traceId = RandomUtils.currentTimeMillisWithIncrement(TRACE_TIME_STRING_LENGTH, TRACE_SUFFIX_LENGTH);
         testLog.setTraceNo(traceId);
+    }
+
+    @Override
+    public PageInfo<TestLog> listFetchAll(int page, int rows) {
+        return PageHelper.startPage(page, rows)
+                .doSelectPageInfo(testLogMapper::selectFetchAll);
     }
 }

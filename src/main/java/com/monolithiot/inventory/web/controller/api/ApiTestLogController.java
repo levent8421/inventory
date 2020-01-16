@@ -1,6 +1,8 @@
 package com.monolithiot.inventory.web.controller.api;
 
+import com.github.pagehelper.PageInfo;
 import com.monolithiot.inventory.commons.entity.TestItem;
+import com.monolithiot.inventory.commons.entity.TestLog;
 import com.monolithiot.inventory.service.general.TestItemService;
 import com.monolithiot.inventory.service.general.TestLogService;
 import com.monolithiot.inventory.web.controller.commons.AbstractController;
@@ -10,10 +12,7 @@ import com.monolithiot.inventory.web.vo.TestLogParam;
 import com.monolithiot.inventory.web.vo.TestLogResult;
 import lombok.val;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Create By Levent8421
@@ -56,5 +55,21 @@ public class ApiTestLogController extends AbstractController {
         }
         testItemService.log(testItems);
         return GeneralResult.ok();
+    }
+
+    /**
+     * 查询所有日志
+     *
+     * @param page page
+     * @param rows rows
+     * @return GR
+     */
+    @GetMapping("/")
+    public GeneralResult<PageInfo<TestLog>> all(Integer page, Integer rows) {
+        page = defaultPage(page);
+        rows = defaultRows(rows);
+
+        val res = testLogService.listFetchAll(page, rows);
+        return GeneralResult.ok(res);
     }
 }
