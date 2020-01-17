@@ -53,8 +53,8 @@ public class TestLog extends AbstractEntity {
     /**
      * 测试物料号
      */
-    @Column(name = "product_part_id", length = 10, nullable = false)
-    private Integer productPartId;
+    @Column(name = "product_part_no")
+    private String productPartNo;
     /**
      * 设备SN
      */

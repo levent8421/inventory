@@ -33,3 +33,6 @@ select ti.id           ti_id,
        ti.deleted      ti_deleted
 from t_test_item as ti
 where ti.deleted = false;
+
+alter table t_test_item
+    modify result_value text null comment '测试结果';

@@ -37,7 +37,7 @@ public class TestLogUtils {
         notNull(param.getState(), ex, "最终测试状态必填！");
         notNull(param.getTestTime(), ex, "测试时间必填！");
         notNull(param.getDuration(), ex, "测试耗时必填！");
-        notNull(param.getPartId(), ex, "物料号必填！");
+        notEmpty(param.getPartNo(), ex, "物料号必填！");
         if (param.getItems() != null) {
             for (TestItemParam itemParam : param.getItems()) {
                 checkTestItemParam(itemParam);
@@ -72,7 +72,7 @@ public class TestLogUtils {
         testLog.setDuration(param.getDuration());
         testLog.setDeviceSn(param.getDeviceSn());
         testLog.setProductOrderId(param.getOrderId());
-        testLog.setProductPartId(param.getPartId());
+        testLog.setProductPartNo(param.getPartNo());
         testLog.setState(param.getState());
         testLog.setRemark(param.getRemark());
 

@@ -8,7 +8,7 @@
         tl.test_time        tl_test_time,
         tl.duration         tl_duration,
         tl.product_order_id tl_product_order_id,
-        tl.product_part_id  tl_product_part_id,
+        tl.product_part_no  tl_product_part_no,
         tl.device_sn        tl_device_sn,
         tl.state            tl_state,
         tl.remark           tl_remark,
@@ -36,7 +36,7 @@
         <result column="tl_test_time" property="testTime"/>
         <result column="tl_duration" property="duration"/>
         <result column="tl_product_order_id" property="productOrderId"/>
-        <result column="tl_product_part_id" property="productPartId"/>
+        <result column="tl_product_part_no" property="productPartNo"/>
         <result column="tl_device_sn" property="deviceSn"/>
         <result column="tl_state" property="state"/>
         <result column="tl_remark" property="remark"/>

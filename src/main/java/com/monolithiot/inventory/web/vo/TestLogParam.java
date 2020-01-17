@@ -38,9 +38,9 @@ public class TestLogParam {
      */
     private Integer orderId;
     /**
-     * 物料ID 必填
+     * 物料I号 必填
      */
-    private Integer partId;
+    private String partNo;
     /**
      * 备注 非必填
      */
