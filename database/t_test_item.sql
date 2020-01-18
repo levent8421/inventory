@@ -36,3 +36,6 @@ where ti.deleted = false;
 
 alter table t_test_item
     modify result_value text null comment '测试结果';
+
+alter table t_test_item
+    modify duration double(20, 5) not null comment '耗时';

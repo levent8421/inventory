@@ -44,8 +44,8 @@ public class TestItem extends AbstractEntity {
     /**
      * 测试用时
      */
-    @Column(name = "duration", length = 10)
-    private Integer duration;
+    @Column(name = "duration", length = 20)
+    private Double duration;
     /**
      * 测试结果
      */

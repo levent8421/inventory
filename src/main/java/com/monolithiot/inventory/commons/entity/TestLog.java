@@ -43,8 +43,8 @@ public class TestLog extends AbstractEntity {
     /**
      * 测试耗时
      */
-    @Column(name = "duration", length = 10)
-    private Integer duration;
+    @Column(name = "duration", length = 20)
+    private Double duration;
     /**
      * 订单ID
      */

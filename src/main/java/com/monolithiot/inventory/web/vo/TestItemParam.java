@@ -35,7 +35,7 @@ public class TestItemParam {
     /**
      * 测试耗时
      */
-    private Integer duration;
+    private Double duration;
     /**
      * 备注
      */

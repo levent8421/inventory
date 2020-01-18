@@ -32,7 +32,7 @@ public class TestLogParam {
     /**
      * 总测试用时(ms) 必填
      */
-    private Integer duration;
+    private Double duration;
     /**
      * 订单ID 非必填
      */

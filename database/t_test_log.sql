@@ -39,3 +39,6 @@ select tl.id               tl_id,
        tl.deleted          tl_deleted
 from t_test_log as tl
 where tl.deleted = false;
+
+alter table t_test_log
+    modify duration double(20, 5) not null comment '耗时';
