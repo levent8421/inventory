@@ -23,11 +23,13 @@ import java.io.IOException;
  * @author Levent*421
  */
 public class FailJsonUserFilter extends UserFilter {
+    private static final String PERMISSION_DENIED_ERROR_STRING = "未授权或登录失败！";
+
     @Override
     protected void redirectToLogin(ServletRequest request, ServletResponse response) throws IOException {
         response.setContentType(Constants.ContentType.JSON_UTF8);
         if (ServletUtils.isAjax((HttpServletRequest) request)) {
-            val res = GeneralResult.permissionDenied("未授权或登录失败！");
+            val res = GeneralResult.permissionDenied(PERMISSION_DENIED_ERROR_STRING);
             val json = JSON.toJSONString(res);
             response.getWriter().write(json);
         } else {

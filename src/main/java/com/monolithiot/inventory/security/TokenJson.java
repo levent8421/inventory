@@ -15,11 +15,20 @@ import lombok.val;
  */
 @Data
 public class TokenJson {
+    /**
+     * Factory Method
+     *
+     * @param userId userId
+     * @return TokenJSON object
+     */
     public static TokenJson of(Integer userId) {
         val json = new TokenJson();
         json.setUserId(userId);
         return json;
     }
 
+    /**
+     * User Id
+     */
     private Integer userId;
 }
