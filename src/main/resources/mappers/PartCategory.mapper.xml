@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monolithiot.inventory.repository.mapper.PartCategoryMapper">
+    <sql id="columns">
+        pc.id           pc_id,
+        pc.part_type_id pc_part_type_id,
+        pc.name         pc_name,
+        pc.description  pc_description,
+        pc.partNoPrefix pc_partNoPrefix,
+        pc.partNoLength pc_partNoLength,
+        pc.create_time  pc_create_time,
+        pc.update_time  pc_update_time,
+        pc.deleted      pc_deleted
+    </sql>
+    <sql id="select">
+        select
+        <include refid="columns"/>
+        from t_part_category as pc
+        where (pc.deleted = false or pc.deleted is null)
+    </sql>
+    <resultMap id="rm_base" type="com.monolithiot.inventory.commons.entity.PartCategory">
+        <id column="pc_id" property="id"/>
+        <result column="pc_part_type_id" property="partTypeId"/>
+        <result column="pc_name" property="name"/>
+        <result column="pc_description" property="description"/>
+        <result column="pc_partNoPrefix" property="partNoPrefix"/>
+        <result column="pc_partNoLength" property="partNoLength"/>
+        <result column="pc_create_time" property="createTime"/>
+        <result column="pc_update_time" property="updateTime"/>
+        <result column="pc_deleted" property="deleted"/>
+    </resultMap>
+</mapper>

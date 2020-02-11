@@ -45,7 +45,7 @@ public abstract class AbstractServiceImpl<T extends AbstractEntity> implements A
         Type superclass = getClass().getGenericSuperclass();
         while (!(superclass instanceof ParameterizedType)) {
             if (superclass instanceof Class) {
-                Class<?> clazz = (Class<?>) superclass;
+                final Class<?> clazz = (Class<?>) superclass;
                 superclass = clazz.getGenericSuperclass();
             } else {
                 throw new IllegalArgumentException("The superclass of service must be a Adapter or BaseServiceImpl");
