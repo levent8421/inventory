@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monolithiot.inventory.repository.mapper.PartStatusMapper">
+    <sql id="columns">
+        ps.id          ps_id,
+        ps.name        ps_name,
+        ps.description ps_description,
+        ps.create_time ps_create_time,
+        ps.update_time ps_update_time,
+        ps.deleted     ps_deleted
+    </sql>
+    <sql id="select">
+        select
+        <include refid="columns"/>
+        from t_part_status as ps
+        where (ps.deleted = false or ps.deleted is null)
+    </sql>
+    <resultMap id="rm_base" type="com.monolithiot.inventory.commons.entity.PartStatus">
+        <id column="ps_id" property="id"/>
+        <result column="ps_name" property="name"/>
+        <result column="ps_description" property="description"/>
+        <result column="ps_create_time" property="createTime"/>
+        <result column="ps_update_time" property="updateTime"/>
+        <result column="ps_deleted" property="deleted"/>
+    </resultMap>
+</mapper>
