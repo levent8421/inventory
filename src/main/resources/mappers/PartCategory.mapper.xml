@@ -29,4 +29,8 @@
         <result column="pc_update_time" property="updateTime"/>
         <result column="pc_deleted" property="deleted"/>
     </resultMap>
+    <select id="selectByTypeId" resultMap="rm_base">
+        <include refid="select"/>
+        and (pc.part_type_id=#{typeId})
+    </select>
 </mapper>

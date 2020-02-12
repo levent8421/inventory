@@ -37,12 +37,12 @@ public class PartCategory extends AbstractEntity {
     @Column(name = "description", length = 128)
     private String description;
     /**
-     * ?????
+     * 物料号前缀
      */
     @Column(name = "partNoPrefix", length = 32)
     private String partNoPrefix;
     /**
-     * ?????
+     * 物料号长度
      */
     @Column(name = "partNoLength", length = 10, nullable = false)
     private Integer partNoLength;
