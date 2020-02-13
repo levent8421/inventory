@@ -2,6 +2,7 @@ package com.monolithiot.inventory.service.general;
 
 import com.monolithiot.inventory.commons.entity.PartQuantity;
 import com.monolithiot.inventory.service.commons.AbstractService;
+import com.monolithiot.inventory.service.vo.PartVo;
 
 import java.util.List;
 
@@ -23,4 +24,15 @@ public interface PartQuantityService extends AbstractService<PartQuantity> {
      * @return QuantityList
      */
     List<PartQuantity> findByPartId(Integer partId);
+
+    /**
+     * 物料库存搜素
+     *
+     * @param partNoList 物料号列表
+     * @param categoryId 类别ID
+     * @param clusterId  分类ID
+     * @param desc       描述
+     * @return PartVo
+     */
+    List<PartVo> search(List<String> partNoList, Integer categoryId, Integer clusterId, String desc);
 }

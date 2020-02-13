@@ -26,10 +26,18 @@ public class PartQuantity extends AbstractEntity {
     @Column(name = "part_id", length = 10, nullable = false)
     private Integer partId;
     /**
+     * 物料对象
+     */
+    private Part part;
+    /**
      * 库位ID
      */
     @Column(name = "storage_location_id", length = 10, nullable = false)
     private Integer storageLocationId;
+    /**
+     * 关联的库位对象
+     */
+    private StorageLocation storageLocation;
     /**
      * 料盒号
      */

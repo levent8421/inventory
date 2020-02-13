@@ -26,4 +26,18 @@ public interface PartQuantityMapper extends AbstractMapper<PartQuantity> {
      * @return Quantity List
      */
     List<PartQuantity> selectByPartId(@Param("partId") Integer partId);
+
+    /**
+     * 搜索物料库存量
+     *
+     * @param partNoList 物料号列表
+     * @param desc       描述
+     * @param categoryId 类别ID
+     * @param clusterId  库位ID
+     * @return PartQuantityDto List
+     */
+    List<PartQuantity> search(@Param("partNoList") List<String> partNoList,
+                              @Param("desc") String desc,
+                              @Param("categoryId") Integer categoryId,
+                              @Param("clusterId") Integer clusterId);
 }

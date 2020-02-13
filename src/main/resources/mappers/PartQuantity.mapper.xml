@@ -27,8 +27,38 @@
         <result column="pq_update_time" property="updateTime"/>
         <result column="pq_deleted" property="deleted"/>
     </resultMap>
+    <resultMap id="rm_all" type="com.monolithiot.inventory.commons.entity.PartQuantity" extends="rm_base">
+        <association property="part" resultMap="com.monolithiot.inventory.repository.mapper.PartMapper.rm_all"/>
+        <association property="storageLocation"
+                     resultMap="com.monolithiot.inventory.repository.mapper.StorageLocationMapper.rm_base"/>
+    </resultMap>
     <select id="selectByPartId" resultMap="rm_base">
         <include refid="select"/>
         and (pq.part_id=#{partId})
+    </select>
+    <select id="search" resultMap="rm_all">
+        select
+        <include refid="columns"/>,
+        <include refid="com.monolithiot.inventory.repository.mapper.PartMapper.columns"/>,
+        <include refid="com.monolithiot.inventory.repository.mapper.PartCategoryMapper.columns"/>,
+        <include refid="com.monolithiot.inventory.repository.mapper.PartClusterMapper.columns"/>,
+        <include refid="com.monolithiot.inventory.repository.mapper.StorageLocationMapper.columns"/>,
+        <include refid="com.monolithiot.inventory.repository.mapper.PartStatusMapper.columns"/>
+        from t_part_quantity as pq
+        left outer join t_part as p on pq.part_id = p.id
+        left outer join t_part_category as pc on p.part_category_id = pc.id
+        left outer join t_part_cluster as pcl on p.part_cluster_id = pcl.id
+        left outer join t_part_status as ps on p.part_status_id = ps.id
+        left outer join t_storage_location as sl on pq.storage_location_id=sl.id
+        where ((pq.deleted = false or pq.deleted is null) and (p.deleted = false or p.deleted is null) and
+        (pc.deleted = false or pc.deleted is null) and (pcl.deleted = false or pcl.deleted is null) and
+        (ps.deleted = false or ps.deleted is null))
+        and (p.part_category_id = #{categoryId}
+        and (p.description like #{desc} or p.model like #{desc} or p.model like #{desc})
+        and p.partNo in
+        <foreach collection="partNoList" open="(" close=")" separator="," item="partNo">
+            #{partNo}
+        </foreach>
+        )
     </select>
 </mapper>

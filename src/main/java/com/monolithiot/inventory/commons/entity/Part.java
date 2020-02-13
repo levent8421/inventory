@@ -31,15 +31,27 @@ public class Part extends AbstractEntity {
     @Column(name = "part_category_id", length = 10, nullable = false)
     private Integer partCategoryId;
     /**
+     * 关联的类别对象
+     */
+    private PartCategory partCategory;
+    /**
      * 状态ID
      */
     @Column(name = "part_status_id", length = 10, nullable = false)
     private Integer partStatusId;
     /**
+     * 物料状态对象
+     */
+    private PartStatus partStatus;
+    /**
      * 物料库位
      */
     @Column(name = "part_cluster_id", length = 10, nullable = false)
     private Integer partClusterId;
+    /**
+     * 物料库位对象
+     */
+    private PartCluster partCluster;
     /**
      * 物料号
      */

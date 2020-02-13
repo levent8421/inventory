@@ -42,4 +42,12 @@
         <result column="p_update_time" property="updateTime"/>
         <result column="p_deleted" property="deleted"/>
     </resultMap>
+    <resultMap id="rm_all" type="com.monolithiot.inventory.commons.entity.Part" extends="rm_base">
+        <association property="partCategory"
+                     resultMap="com.monolithiot.inventory.repository.mapper.PartCategoryMapper.rm_base"/>
+        <association property="partStatus"
+                     resultMap="com.monolithiot.inventory.repository.mapper.PartStatusMapper.rm_base"/>
+        <association property="partCluster"
+                     resultMap="com.monolithiot.inventory.repository.mapper.PartClusterMapper.rm_base"/>
+    </resultMap>
 </mapper>
