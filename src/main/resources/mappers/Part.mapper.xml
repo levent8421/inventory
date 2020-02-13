@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monolithiot.inventory.repository.mapper.PartMapper">
+    <sql id="columns">
+        p.id               p_id,
+        p.user_id          p_user_id,
+        p.part_category_id p_part_category_id,
+        p.part_status_id   p_part_status_id,
+        p.part_cluster_id  p_part_cluster_id,
+        p.partNo           p_partNo,
+        p.description      p_description,
+        p.model            p_model,
+        p.packaging        p_packaging,
+        p.brand            p_brand,
+        p.packingQty       p_packingQty,
+        p.version          p_version,
+        p.create_time      p_create_time,
+        p.update_time      p_update_time,
+        p.deleted          p_deleted
+    </sql>
+    <sql id="select">
+        select
+        <include refid="columns"/>
+        from t_part as p
+        where (p.deleted = false or p.deleted is null)
+    </sql>
+    <resultMap id="rm_base" type="com.monolithiot.inventory.commons.entity.Part">
+        <id column="p_id" property="id"/>
+        <result column="p_user_id" property="userId"/>
+        <result column="p_part_category_id" property="partCategoryId"/>
+        <result column="p_part_status_id" property="partStatusId"/>
+        <result column="p_part_cluster_id" property="partClusterId"/>
+        <result column="p_partNo" property="partNo"/>
+        <result column="p_description" property="description"/>
+        <result column="p_model" property="model"/>
+        <result column="p_packaging" property="packaging"/>
+        <result column="p_brand" property="brand"/>
+        <result column="p_packingQty" property="packingQty"/>
+        <result column="p_version" property="version"/>
+        <result column="pcl_description" property="description"/>
+        <result column="p_create_time" property="createTime"/>
+        <result column="p_update_time" property="updateTime"/>
+        <result column="p_deleted" property="deleted"/>
+    </resultMap>
+</mapper>

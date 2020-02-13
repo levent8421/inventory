@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monolithiot.inventory.repository.mapper.PartQuantityMapper">
+    <sql id="columns">
+        pq.id                  pq_id,
+        pq.part_id             pq_part_id,
+        pq.storage_location_id pq_storage_location_id,
+        pq.binNo               pq_binNo,
+        pq.quantity            pq_quantity,
+        pq.create_time         pq_create_time,
+        pq.update_time         pq_update_time,
+        pq.deleted             pq_deleted
+    </sql>
+    <sql id="select">
+        select
+        <include refid="columns"/>
+        from t_part_quantity as pq
+        where (pq.deleted = false or pq.deleted is null)
+    </sql>
+    <resultMap id="rm_base" type="com.monolithiot.inventory.commons.entity.PartQuantity">
+        <id column="pq_id" property="id"/>
+        <result column="pq_part_id" property="partId"/>
+        <result column="pq_storage_location_id" property="storageLocationId"/>
+        <result column="pq_binNo" property="binNo"/>
+        <result column="pq_quantity" property="quantity"/>
+        <result column="pq_create_time" property="createTime"/>
+        <result column="pq_update_time" property="updateTime"/>
+        <result column="pq_deleted" property="deleted"/>
+    </resultMap>
+    <select id="selectByPartId" resultMap="rm_base">
+        <include refid="select"/>
+        and (pq.part_id=#{partId})
+    </select>
+</mapper>
