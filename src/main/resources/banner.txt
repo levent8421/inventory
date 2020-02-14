@@ -1,0 +1,9 @@
+${AnsiColor.BLUE} ___ ___  ____  ______ ${AnsiColor.BLACK}       ____  ____   __ __    ___  ____   ______   ___   ____   __ __
+${AnsiColor.BLUE}|   |   ||    ||      |${AnsiColor.BLACK}      |    ||    \ |  |  |  /  _]|    \ |      | /   \ |    \ |  |  |
+${AnsiColor.BLUE}| _   _ | |  | |      |${AnsiColor.BLACK} _____ |  | |  _  ||  |  | /  [_ |  _  ||      ||     ||  D  )|  |  |
+${AnsiColor.BLUE}|  \_/  | |  | |_|  |_|${AnsiColor.BLACK}|     ||  | |  |  ||  |  ||    _]|  |  ||_|  |_||  O  ||    / |  ~  |
+${AnsiColor.BLUE}|   |   | |  |   |  |  ${AnsiColor.BLACK}|_____||  | |  |  ||  :  ||   [_ |  |  |  |  |  |     ||    \ |___, |
+${AnsiColor.BLUE}|   |   | |  |   |  |  ${AnsiColor.BLACK}       |  | |  |  | \   / |     ||  |  |  |  |  |     ||  .  \|     |
+${AnsiColor.BLUE}|___|___||____|  |__|  ${AnsiColor.BLACK}      |____||__|__|  \_/  |_____||__|__|  |__|   \___/ |__|\_||____/${AnsiColor.BLACK}
+SpringBoot: ${spring-boot.formatted-version}
+App: ${application.title} version: ${application.formatted-version}
