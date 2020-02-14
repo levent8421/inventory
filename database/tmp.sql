@@ -85,4 +85,17 @@ from t_part_quantity as pq
 where ((pq.deleted = false or pq.deleted is null) and (p.deleted = false or p.deleted is null) and
        (pc.deleted = false or pc.deleted is null) and (pcl.deleted = false or pcl.deleted is null) and
        (ps.deleted = false or ps.deleted is null))
-  and (p.part_category_id = 2 and (p.description like ? or p.model like ? or p.model like ?) and p.partNo in (?, ?))
+  and (p.part_category_id = 2 and (p.description like ? or p.model like ? or p.model like ?) and p.partNo in (?, ?));
+
+
+
+SELECT {t1}.id, {t1}.time AS 时间, {t2}.description AS 动作, {t4}.location AS 库位, {t1}.binNo AS 货架, {t1}.quantity AS 数量, {t3}.name AS 操作人, {t1}.remark AS 备注
+FROM {t1} LEFT JOIN {t2}
+ON {t1}.part_inout_action_id={t2}.id LEFT JOIN {t3} ON {t1}.user_id={t3}.id LEFT JOIN {t4} ON {t1}.storage_location_id={t4}.id
+WHERE {t1}.part_id={Part.ID}
+ORDER BY {t1}.time DESC
+LIMIT 50 "
+    t_part_inout_history=t1;
+t_part_inout_action=t2;
+t_user=t3;
+t_storage_location=t4;

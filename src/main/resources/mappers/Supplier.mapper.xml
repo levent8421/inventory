@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monolithiot.inventory.repository.mapper.SupplierMapper">
+    <sql id="columns">
+        sup.id          sup_id,
+        sup.name        sup_name,
+        sup.address     sup_address,
+        sup.url         sup_url,
+        sup.contactor1  sup_contactor1,
+        sup.contactor2  sup_contactor2,
+        sup.phone1      sup_phone1,
+        sup.phone2      sup_phone2,
+        sup.other1      sup_other1,
+        sup.other2      sup_other2,
+        sup.fax         sup_fax,
+        sup.remark      sup_remark,
+        sup.create_time sup_create_time,
+        sup.update_time sup_update_time,
+        sup.deleted     sup_deleted
+    </sql>
+    <sql id="select">
+        select
+        <include refid="columns"/>
+        from t_supplier as sup
+        where (sup.deleted = false or sup.deleted is null);
+    </sql>
+    <resultMap id="rm_base" type="com.monolithiot.inventory.commons.entity.Supplier">
+        <id column="sup_id" property="id"/>
+        <result column="sup_name" property="name"/>
+        <result column="sup_address" property="address"/>
+        <result column="sup_url" property="url"/>
+        <result column="sup_contactor1" property="contactor1"/>
+        <result column="sup_contactor2" property="contactor2"/>
+        <result column="sup_phone1" property="phone1"/>
+        <result column="sup_phone2" property="phone2"/>
+        <result column="sup_other1" property="other1"/>
+        <result column="sup_other2" property="other2"/>
+        <result column="sup_fax" property="fax"/>
+        <result column="sup_remark" property="remark"/>
+        <result column="sup_create_time" property="createTime"/>
+        <result column="sup_update_time" property="updateTime"/>
+        <result column="sup_deleted" property="deleted"/>
+    </resultMap>
+</mapper>

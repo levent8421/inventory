@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monolithiot.inventory.repository.mapper.PartInoutActionMapper">
+    <sql id="columns">
+        pia.id          pia_id,
+        pia.name        pia_name,
+        pia.description pia_description,
+        pia.direction   pia_direction,
+        pia.create_time pia_create_time,
+        pia.update_time pia_update_time,
+        pia.deleted     pia_deleted
+    </sql>
+    <sql id="select">
+        select
+        <include refid="columns"/>
+        from t_part_inout_action as pia
+        where (pia.deleted = false or pia.deleted is null)
+    </sql>
+    <resultMap id="rm_base" type="com.monolithiot.inventory.commons.entity.PartInoutAction">
+        <id column="pia_id" property="id"/>
+        <result column="pia_name" property="name"/>
+        <result column="pia_description" property="description"/>
+        <result column="pia_direction" property="direction"/>
+        <result column="pia_create_time" property="createTime"/>
+        <result column="pia_update_time" property="updateTime"/>
+        <result column="pia_deleted" property="deleted"/>
+    </resultMap>
+</mapper>
