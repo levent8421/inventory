@@ -12,7 +12,6 @@ create table t_part_quantity
 
 create index part_id
     on t_part_quantity (part_id);
-
 alter table t_part_quantity
     add column create_time datetime null comment '创建时间' after quantity;
 alter table t_part_quantity

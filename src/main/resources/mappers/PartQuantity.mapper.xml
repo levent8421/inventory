@@ -53,12 +53,18 @@
         where ((pq.deleted = false or pq.deleted is null) and (p.deleted = false or p.deleted is null) and
         (pc.deleted = false or pc.deleted is null) and (pcl.deleted = false or pcl.deleted is null) and
         (ps.deleted = false or ps.deleted is null))
-        and (p.part_category_id = #{categoryId}
-        and (p.description like #{desc} or p.model like #{desc} or p.model like #{desc})
-        and p.partNo in
-        <foreach collection="partNoList" open="(" close=")" separator="," item="partNo">
-            #{partNo}
-        </foreach>
+        <if test="categoryId!=null">
+            and (p.part_category_id = #{categoryId}
+        </if>
+        <if test="desc!=null">
+            and (p.description like #{desc} or p.model like #{desc} or p.model like #{desc})
+        </if>
+        <if test="partNoList!=null and partNoList.size>0">
+            and p.partNo in
+            <foreach collection="partNoList" open="(" close=")" separator="," item="partNo">
+                #{partNo}
+            </foreach>
+        </if>
         )
     </select>
 </mapper>

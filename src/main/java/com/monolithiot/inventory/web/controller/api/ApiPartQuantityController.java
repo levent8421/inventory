@@ -1,6 +1,7 @@
 package com.monolithiot.inventory.web.controller.api;
 
 import com.monolithiot.inventory.commons.entity.PartQuantity;
+import com.monolithiot.inventory.commons.util.TextUtils;
 import com.monolithiot.inventory.service.general.PartQuantityService;
 import com.monolithiot.inventory.service.vo.PartVo;
 import com.monolithiot.inventory.web.controller.commons.AbstractController;
@@ -55,10 +56,10 @@ public class ApiPartQuantityController extends AbstractController {
      * @return GR
      */
     @GetMapping("/_search")
-    public GeneralResult<List<PartVo>> search(@RequestParam("partNoList") String partNoList,
-                                              @RequestParam("clusterId") Integer clusterId,
-                                              @RequestParam("categoryId") Integer categoryId,
-                                              @RequestParam("desc") String desc) {
+    public GeneralResult<List<PartVo>> search(String partNoList,
+                                              Integer clusterId,
+                                              Integer categoryId,
+                                              String desc) {
         val noList = asPartNoList(partNoList);
         val res = partQuantityService.search(noList, categoryId, clusterId, desc);
         return GeneralResult.ok(res);
@@ -73,7 +74,6 @@ public class ApiPartQuantityController extends AbstractController {
      * @return list
      */
     private List<String> asPartNoList(String partNoStr) {
-        return Arrays.asList(partNoStr.split(PART_NO_DELIMITER));
+        return TextUtils.isBlank(partNoStr) ? null : Arrays.asList(partNoStr.split(PART_NO_DELIMITER));
     }
-
 }
