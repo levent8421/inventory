@@ -2,6 +2,7 @@ package com.monolithiot.inventory.service.general.impl;
 
 import com.monolithiot.inventory.commons.entity.Part;
 import com.monolithiot.inventory.commons.entity.PartQuantity;
+import com.monolithiot.inventory.commons.util.TextUtils;
 import com.monolithiot.inventory.repository.mapper.PartQuantityMapper;
 import com.monolithiot.inventory.service.commons.impl.AbstractServiceImpl;
 import com.monolithiot.inventory.service.general.PartQuantityService;
@@ -40,7 +41,11 @@ public class PartQuantityServiceImpl extends AbstractServiceImpl<PartQuantity> i
 
     @Override
     public List<PartVo> search(List<String> partNoList, Integer categoryId, Integer clusterId, String desc) {
-        desc = "%" + desc + "%";
+        if (desc == null || TextUtils.isBlank(desc)) {
+            desc = null;
+        } else {
+            desc = "%" + desc + "%";
+        }
         val quantities = partQuantityMapper.search(partNoList, desc, categoryId, clusterId);
         val partQuantitiesMap = new HashMap<Integer, List<PartQuantity>>(16);
         val partMap = new HashMap<Integer, Part>(16);

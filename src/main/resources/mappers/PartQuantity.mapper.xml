@@ -54,7 +54,7 @@
         (pc.deleted = false or pc.deleted is null) and (pcl.deleted = false or pcl.deleted is null) and
         (ps.deleted = false or ps.deleted is null))
         <if test="categoryId!=null">
-            and (p.part_category_id = #{categoryId}
+            and (p.part_category_id = #{categoryId})
         </if>
         <if test="desc!=null">
             and (p.description like #{desc} or p.model like #{desc} or p.model like #{desc})
@@ -65,6 +65,5 @@
                 #{partNo}
             </foreach>
         </if>
-        )
     </select>
 </mapper>
