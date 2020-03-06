@@ -62,6 +62,11 @@ public class Part extends AbstractEntity {
      */
     @Column(name = "description", length = 128)
     private String description;
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     /**
      * 型号
      */

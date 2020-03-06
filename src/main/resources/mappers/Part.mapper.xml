@@ -37,7 +37,6 @@
         <result column="p_brand" property="brand"/>
         <result column="p_packingQty" property="packingQty"/>
         <result column="p_version" property="version"/>
-        <result column="pcl_description" property="description"/>
         <result column="p_create_time" property="createTime"/>
         <result column="p_update_time" property="updateTime"/>
         <result column="p_deleted" property="deleted"/>
