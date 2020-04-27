@@ -10,10 +10,8 @@ import com.monolithiot.inventory.service.vo.PartVo;
 import lombok.val;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Create By Levent8421
@@ -41,7 +39,7 @@ public class PartQuantityServiceImpl extends AbstractServiceImpl<PartQuantity> i
 
     @Override
     public List<PartVo> search(List<String> partNoList, Integer categoryId, Integer clusterId, String desc) {
-        if (desc == null || TextUtils.isBlank(desc)) {
+        if (TextUtils.isBlank(desc)) {
             desc = null;
         } else {
             desc = "%" + desc + "%";
@@ -61,7 +59,8 @@ public class PartQuantityServiceImpl extends AbstractServiceImpl<PartQuantity> i
         for (final Map.Entry<Integer, Part> entry : partMap.entrySet()) {
             val vo = PartVo.fromPart(entry.getValue());
             val partQuantities = partQuantitiesMap.get(entry.getKey());
-            vo.setQuantities(partQuantities);
+            val realQuantities = partQuantities.stream().filter(q -> Objects.nonNull(q.getId())).collect(Collectors.toList());
+            vo.setQuantities(realQuantities);
             res.add(vo);
         }
         return res;

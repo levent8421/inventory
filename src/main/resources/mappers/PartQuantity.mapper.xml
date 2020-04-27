@@ -45,7 +45,7 @@
         <include refid="com.monolithiot.inventory.repository.mapper.StorageLocationMapper.columns"/>,
         <include refid="com.monolithiot.inventory.repository.mapper.PartStatusMapper.columns"/>
         from t_part_quantity as pq
-        left outer join t_part as p on pq.part_id = p.id
+        right join t_part as p on pq.part_id = p.id
         left outer join t_part_category as pc on p.part_category_id = pc.id
         left outer join t_part_cluster as pcl on p.part_cluster_id = pcl.id
         left outer join t_part_status as ps on p.part_status_id = ps.id
@@ -57,7 +57,7 @@
             and (p.part_category_id = #{categoryId})
         </if>
         <if test="desc!=null">
-            and (p.description like #{desc} or p.model like #{desc} or p.model like #{desc})
+            and (p.description like #{desc} or p.model like #{desc} or p.packaging like #{desc})
         </if>
         <if test="partNoList!=null and partNoList.size>0">
             and p.partNo in
