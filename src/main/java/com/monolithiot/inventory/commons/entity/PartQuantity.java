@@ -47,5 +47,5 @@ public class PartQuantity extends AbstractEntity {
      * 数量
      */
     @Column(name = "quantity", length = 10, nullable = false)
-    private Integer quantity;
+    private Double quantity;
 }

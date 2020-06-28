@@ -50,7 +50,7 @@ public class PartQuantityServiceImpl extends AbstractServiceImpl<PartQuantity> i
         for (final PartQuantity quantity : quantities) {
             val quantityList = partQuantitiesMap.computeIfAbsent(quantity.getPartId(), key -> new ArrayList<>());
             quantityList.add(quantity);
-            val key = quantity.getPartId();
+            val key = quantity.getPart().getId();
             val part = quantity.getPart();
             partMap.put(key, part);
             quantity.setPart(null);
@@ -59,7 +59,10 @@ public class PartQuantityServiceImpl extends AbstractServiceImpl<PartQuantity> i
         for (final Map.Entry<Integer, Part> entry : partMap.entrySet()) {
             val vo = PartVo.fromPart(entry.getValue());
             val partQuantities = partQuantitiesMap.get(entry.getKey());
-            val realQuantities = partQuantities.stream().filter(q -> Objects.nonNull(q.getId())).collect(Collectors.toList());
+            final List<PartQuantity> realQuantities =
+                    partQuantities == null ? Collections.emptyList() : partQuantities.stream()
+                            .filter(q -> Objects.nonNull(q.getId()))
+                            .collect(Collectors.toList());
             vo.setQuantities(realQuantities);
             res.add(vo);
         }

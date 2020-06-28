@@ -78,7 +78,7 @@ public class OpenUserController extends AbstractController {
         ParamChecker.notEmpty(param.getPassword(), ex, "密码必填！");
         val user = userService.login(param.getUsername(), param.getPassword());
         if (user == null) {
-            return GeneralResult.ok("用户名或密码错误！");
+            return GeneralResult.permissionDenied("用户名或密码错误！");
         }
         val digestString = AccessTokenUtils.asTokenString(user, accessTokenEncoder);
 
