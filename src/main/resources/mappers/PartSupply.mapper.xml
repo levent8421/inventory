@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monolithiot.inventory.repository.mapper.PartSupplyMapper">
+    <sql id="columns">
+        psup.id           as psup_id,
+        psup.part_id      as psup_part_id,
+        psup.supplier_id  as psup_supplier_id,
+        psup.moq          as psup_moq,
+        psup.deliveryDays as psup_deliveryDays,
+        psup.unitPrice    as psup_unitPrice,
+        psup.unitTaxPrice as psup_unitTaxPrice,
+        psup.isDefault    as psup_isDefault,
+        psup.url          as psup_url,
+        psup.remark       as psup_remark,
+        psup.create_time  as psup_create_time,
+        psup.update_time  as psup_update_time,
+        psup.deleted      as psup_deleted
+    </sql>
+    <sql id="select">
+        select
+        <include refid="columns"/>
+        from t_part_supply as psup
+        where (psup.deleted = false or psup.deleted is null)
+    </sql>
+    <resultMap id="rm_base" type="com.monolithiot.inventory.commons.entity.PartSupply">
+        <id column="psup_id" property="id"/>
+        <result column="psup_part_id" property="partId"/>
+        <result column="psup_supplier_id" property="supplierId"/>
+        <result column="psup_moq" property="moq"/>
+        <result column="psup_deliveryDays" property="deliveryDays"/>
+        <result column="psup_unitPrice" property="unitPrice"/>
+        <result column="psup_unitTaxPrice" property="unitTaxPrice"/>
+        <result column="psup_isDefault" property="isDefault"/>
+        <result column="psup_url" property="url"/>
+        <result column="psup_remark" property="remark"/>
+        <result column="psup_create_time" property="createTime"/>
+        <result column="psup_update_time" property="updateTime"/>
+        <result column="psup_deleted" property="deleted"/>
+    </resultMap>
+</mapper>

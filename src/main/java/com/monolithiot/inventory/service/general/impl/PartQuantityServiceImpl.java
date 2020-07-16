@@ -68,4 +68,9 @@ public class PartQuantityServiceImpl extends AbstractServiceImpl<PartQuantity> i
         }
         return res;
     }
+
+    @Override
+    public List<PartQuantity> outOfStockQuntityList() {
+        return partQuantityMapper.selectFetchAllByQuantityLessThanMinQuantity();
+    }
 }

@@ -7,6 +7,7 @@
         pq.storage_location_id pq_storage_location_id,
         pq.binNo               pq_binNo,
         pq.quantity            pq_quantity,
+        pq.minQuantity as pq_min_quantity,
         pq.create_time         pq_create_time,
         pq.update_time         pq_update_time,
         pq.deleted             pq_deleted
@@ -23,6 +24,7 @@
         <result column="pq_storage_location_id" property="storageLocationId"/>
         <result column="pq_binNo" property="binNo"/>
         <result column="pq_quantity" property="quantity"/>
+        <result column="pq_min_quantity" property="minQuantity"/>
         <result column="pq_create_time" property="createTime"/>
         <result column="pq_update_time" property="updateTime"/>
         <result column="pq_deleted" property="deleted"/>
@@ -65,5 +67,16 @@
                 #{partNo}
             </foreach>
         </if>
+    </select>
+    <select id="selectFetchAllByQuantityLessThanMinQuantity" resultMap="rm_all">
+        select
+        <include refid="columns"/>,
+        <include refid="com.monolithiot.inventory.repository.mapper.StorageLocationMapper.columns"/>,
+        <include refid="com.monolithiot.inventory.repository.mapper.PartMapper.columns"/>
+        from t_part_quantity as pq
+        left outer join t_part as p on pq.part_id = p.id
+        left outer join t_part_category as pc on p.part_category_id = pc.id
+        left outer join t_storage_location as sl on pq.storage_location_id = sl.id
+        where pq.quantity&lt;pq.minQuantity
     </select>
 </mapper>

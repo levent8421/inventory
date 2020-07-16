@@ -40,4 +40,11 @@ public interface PartQuantityMapper extends AbstractMapper<PartQuantity> {
                               @Param("desc") String desc,
                               @Param("categoryId") Integer categoryId,
                               @Param("clusterId") Integer clusterId);
+
+    /**
+     * Select XXX from PartQuantity where quantity < minQuantity
+     *
+     * @return PartQuantity List
+     */
+    List<PartQuantity> selectFetchAllByQuantityLessThanMinQuantity();
 }

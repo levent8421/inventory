@@ -35,4 +35,11 @@ public interface PartQuantityService extends AbstractService<PartQuantity> {
      * @return PartVo
      */
     List<PartVo> search(List<String> partNoList, Integer categoryId, Integer clusterId, String desc);
+
+    /**
+     * 查询所有缺货库存 即库存小于最小库存
+     *
+     * @return quantity list
+     */
+    List<PartQuantity> outOfStockQuntityList();
 }

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monolithiot.inventory.repository.mapper.PartInoutHistoryMapper">
+    <sql id="columns">
+        pih.id                   as pih_id,
+        pih.user_id              as pih_user_id,
+        pih.part_id              as pih_part_id,
+        pih.part_inout_action_id as pih_part_inout_action_id,
+        pih.storage_location_id  as pih_storage_location_id,
+        pih.binNo                as pih_binNo,
+        pih.quantity             as pih_quantity,
+        pih.quantity_before      as pih_quantity_before,
+        pih.quantity_after       as pih_quantity_after,
+        pih.time                 as pih_time,
+        pih.remark               as pih_remark,
+        pih.traceNo              as pih_traceNo,
+        pih.create_time          as pih_create_time,
+        pih.update_time          as pih_update_time,
+        pih.deleted              as pih_deleted
+    </sql>
+    <sql id="select">
+        select
+        <include refid="columns"/>
+        from t_part_inout_history as pih
+        where (pih.deleted = false or pih.deleted is null)
+    </sql>
+    <resultMap id="rm_base" type="com.monolithiot.inventory.commons.entity.PartInoutHistory">
+        <id column="pih_id" property="id"/>
+        <result column="pih_user_id" property="userId"/>
+        <result column="pih_part_id" property="partId"/>
+        <result column="pih_part_inout_action_id" property="partInoutActionId"/>
+        <result column="pih_storage_location_id" property="storageLocationId"/>
+        <result column="pih_binNo" property="binNo"/>
+        <result column="pih_quantity" property="quantity"/>
+        <result column="pih_quantity_before" property="quantityBefore"/>
+        <result column="pih_quantity_after" property="quantityAfter"/>
+        <result column="pih_time" property="time"/>
+        <result column="pih_remark" property="remark"/>
+        <result column="pih_traceNo" property="traceNo"/>
+        <result column="pih_create_time" property="createTime"/>
+        <result column="pih_update_time" property="updateTime"/>
+        <result column="pih_deleted" property="deleted"/>
+    </resultMap>
+    <resultMap
+            id="rm_with_all"
+            type="com.monolithiot.inventory.commons.entity.PartInoutHistory"
+            extends="rm_base">
+        <association property="user" resultMap="com.monolithiot.inventory.repository.mapper.UserMapper.rm_base"/>
+        <association property="partInoutAction"
+                     resultMap="com.monolithiot.inventory.repository.mapper.PartInoutActionMapper.rm_base"/>
+        <association property="storageLocation"
+                     resultMap="com.monolithiot.inventory.repository.mapper.StorageLocationMapper.rm_base"/>
+        <association property="part" resultMap="com.monolithiot.inventory.repository.mapper.PartMapper.rm_all"/>
+        <association property="partSupply"
+                     resultMap="com.monolithiot.inventory.repository.mapper.PartSupplyMapper.rm_base"/>
+    </resultMap>
+    <select id="selectFetchAllByDateRange" resultMap="rm_with_all">
+        select
+        <include refid="columns"/>,
+        <include refid="com.monolithiot.inventory.repository.mapper.PartInoutActionMapper.columns"/>,
+        <include refid="com.monolithiot.inventory.repository.mapper.StorageLocationMapper.columns"/>,
+        <include refid="com.monolithiot.inventory.repository.mapper.PartMapper.columns"/>,
+        <include refid="com.monolithiot.inventory.repository.mapper.PartSupplyMapper.columns"/>,
+        <include refid="com.monolithiot.inventory.repository.mapper.PartCategoryMapper.columns"/>
+        from (select * from t_part_inout_history where time between #{start} and #{end}) as pih
+        left outer join t_part_inout_action as pia on pih.part_inout_action_id = pia.id
+        left outer join t_storage_location as sl on pih.storage_location_id = sl.id
+        left outer join t_part as p on pih.part_id = p.id
+        left outer join (select * from t_part_supply where isDefault = 1) as psup on pih.part_id = psup.part_id
+        left outer join t_part_category as pc on p.part_category_id = pc.id;
+    </select>
+</mapper>

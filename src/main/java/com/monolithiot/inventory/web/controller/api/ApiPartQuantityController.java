@@ -76,4 +76,15 @@ public class ApiPartQuantityController extends AbstractController {
     private List<String> asPartNoList(String partNoStr) {
         return TextUtils.isBlank(partNoStr) ? null : Arrays.asList(partNoStr.split(PART_NO_DELIMITER));
     }
+
+    /**
+     * 缺货库存
+     *
+     * @return GR
+     */
+    @GetMapping("/_out-of-stock")
+    private GeneralResult<List<PartQuantity>> outOfStock() {
+        final List<PartQuantity> quantities = partQuantityService.outOfStockQuntityList();
+        return GeneralResult.ok(quantities);
+    }
 }

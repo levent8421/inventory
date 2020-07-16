@@ -46,6 +46,11 @@ public class PartQuantity extends AbstractEntity {
     /**
      * 数量
      */
-    @Column(name = "quantity", length = 10, nullable = false)
+    @Column(name = "quantity", nullable = false)
     private Double quantity;
+    /**
+     * 最小数量
+     */
+    @Column(name = "minQuantity", nullable = false)
+    private Double minQuantity;
 }
