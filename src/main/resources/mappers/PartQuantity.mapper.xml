@@ -67,6 +67,9 @@
                 #{partNo}
             </foreach>
         </if>
+        <if test="storageLocationId!=null">
+            and pq.storage_location_id=#{storageLocationId}
+        </if>
     </select>
     <select id="selectFetchAllByQuantityLessThanMinQuantity" resultMap="rm_all">
         select
@@ -78,5 +81,38 @@
         left outer join t_part_category as pc on p.part_category_id = pc.id
         left outer join t_storage_location as sl on pq.storage_location_id = sl.id
         where pq.quantity&lt;pq.minQuantity
+    </select>
+    <select id="selectByPartAndStorageLocation" resultMap="rm_base">
+        <include refid="select"/>
+        and (
+        pq.part_id=#{partId} and
+        pq.storage_location_id=#{storageLocationId}
+        )
+    </select>
+    <update id="batchCountdownQuantities">
+        update t_part_quantity as pq
+        set quantity=quantity - (case pq.part_id
+        <foreach collection="items" item="item" open="" close="" separator="">
+            when #{item.partId} then #{item.count}
+        </foreach>
+        else
+        0
+        end
+        )
+        where pq.storage_location_id=#{storageLocationId}
+        and pq.part_id in
+        <foreach collection="items" item="item" separator="," open="(" close=")">
+            #{item.partId}
+        </foreach>
+    </update>
+    <select id="selectByPartIdsAndStorageLocation" resultMap="rm_base">
+        <include refid="select"/>
+        and (
+        pq.part_id in
+        <foreach collection="partIds" item="partId" open="(" close=")" separator=",">
+            #{partId}
+        </foreach>
+        and pq.storage_location_id=#{storageLocationId}
+        )
     </select>
 </mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.monolithiot.inventory.repository.mapper.PartRelationMapper">
+    <sql id="columns">
+        pr.id            as pr_id,
+        pr.part_id       as pr_part_id,
+        pr.part_id_child as pr_part_id_child,
+        pr.quantity      as pr_quantity,
+        pr.loss          as pr_loss,
+        pr.remark        as pr_remark,
+        pr.create_time   as pr_create_time,
+        pr.update_time   as pr_update_time,
+        pr.deleted       as pr_deleted
+    </sql>
+    <sql id="select">
+        select
+        <include refid="columns"/>
+        from t_part_relation as pr
+        where (pr.deleted is null
+        or pr.deleted = false)
+    </sql>
+    <resultMap id="rm_base" type="com.monolithiot.inventory.commons.entity.PartRelation">
+        <id column="pr_id" property="id"/>
+        <result column="pr_part_id" property="partId"/>
+        <result column="pr_part_id_child" property="partIdChild"/>
+        <result column="pr_quantity" property="quantity"/>
+        <result column="pr_remark" property="remark"/>
+        <result column="pr_create_time" property="createTime"/>
+        <result column="pr_update_time" property="updateTime"/>
+        <result column="pr_deleted" property="deleted"/>
+    </resultMap>
+    <resultMap id="rm_with_child_part" type="com.monolithiot.inventory.commons.entity.PartRelation" extends="rm_base">
+        <association property="childPart" resultMap="com.monolithiot.inventory.repository.mapper.PartMapper.rm_base"/>
+    </resultMap>
+    <select id="selectByPart" resultMap="rm_with_child_part">
+        select
+        <include refid="columns"/>,
+        <include refid="com.monolithiot.inventory.repository.mapper.PartMapper.columns"/>
+        from t_part_relation as pr left outer join t_part as p on pr.part_id_child =p.id where
+        (
+        (pr.deleted is null or pr.deleted = false)
+        and
+        (p.deleted is null or p.deleted = false)
+        )
+        and
+        (
+        pr.part_id=#{partId}
+        )
+    </select>
+</mapper>

@@ -7,6 +7,8 @@ import com.monolithiot.inventory.repository.mapper.PartQuantityMapper;
 import com.monolithiot.inventory.service.commons.impl.AbstractServiceImpl;
 import com.monolithiot.inventory.service.general.PartQuantityService;
 import com.monolithiot.inventory.service.vo.PartVo;
+import com.monolithiot.inventory.service.vo.QuantityBatchUpdateItem;
+import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +25,7 @@ import java.util.stream.Collectors;
  *
  * @author Levent8421
  */
+@Slf4j
 @Service
 public class PartQuantityServiceImpl extends AbstractServiceImpl<PartQuantity> implements PartQuantityService {
     private final PartQuantityMapper partQuantityMapper;
@@ -38,13 +41,13 @@ public class PartQuantityServiceImpl extends AbstractServiceImpl<PartQuantity> i
     }
 
     @Override
-    public List<PartVo> search(List<String> partNoList, Integer categoryId, Integer clusterId, String desc) {
+    public List<PartVo> search(List<String> partNoList, Integer categoryId, Integer clusterId, String desc, Integer storageLocationId) {
         if (TextUtils.isBlank(desc)) {
             desc = null;
         } else {
             desc = "%" + desc + "%";
         }
-        val quantities = partQuantityMapper.search(partNoList, desc, categoryId, clusterId);
+        val quantities = partQuantityMapper.search(partNoList, desc, categoryId, clusterId, storageLocationId);
         val partQuantitiesMap = new HashMap<Integer, List<PartQuantity>>(16);
         val partMap = new HashMap<Integer, Part>(16);
         for (final PartQuantity quantity : quantities) {
@@ -72,5 +75,23 @@ public class PartQuantityServiceImpl extends AbstractServiceImpl<PartQuantity> i
     @Override
     public List<PartQuantity> outOfStockQuntityList() {
         return partQuantityMapper.selectFetchAllByQuantityLessThanMinQuantity();
+    }
+
+    @Override
+    public PartQuantity findByPartAndStorageLocation(Integer partId, Integer storageLocationId) {
+        return partQuantityMapper.selectByPartAndStorageLocation(partId, storageLocationId);
+    }
+
+    @Override
+    public List<PartQuantity> batchOutbound(List<QuantityBatchUpdateItem> items, Integer storageLocationId) {
+        final int rows = partQuantityMapper.batchCountdownQuantities(items, storageLocationId);
+        if (rows != items.size()) {
+            log.warn("BatchUpdate(Countdown) Quantities WARN: paramsSize=[{}], updateRes=[{}]", items.size(), rows);
+        }
+        final List<Integer> partIds = items.stream()
+                .map(QuantityBatchUpdateItem::getPartId)
+                .collect(Collectors.toList());
+
+        return partQuantityMapper.selectByPartIdsAndStorageLocation(partIds, storageLocationId);
     }
 }
